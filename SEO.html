@@ -91,7 +91,7 @@
                         <p> There is no one factor that is most important because they're all important. If I had to pick something you should focus on,
 				<br> it would be providing quality information to people.
 				<br> You can have all the SEO pieces in place, but if your content isn't good, it doesn't matter because people won't be interested in you.</p>
-                        <a  href="Javascript:void(0)">Read More</a>
+                        <a  href="#about">Read More</a>
                      </div>
                   </div>
                </div>
@@ -179,7 +179,7 @@
                   </div>
                </div>
             </div>
-            <a href="Javascript:void(0)">read more</a>
+            <a href="Javascript:void(0)">comming soon</a>
          </div>
       </div>
       <!-- end abouts -->
@@ -207,7 +207,7 @@
                   </div>
                   <br>                       
                   <div class="read-more">
-                     <a href="Javascript:void(0)">explore now</a>
+                     <a href="index.html">explore now</a>
                   </div>
                </div>
             </div>
@@ -231,25 +231,40 @@
                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 offset-md-3">
                   <div class="contact">
                      
-                     <form>
+                     <form action="https://sheetdb.io/api/v1/igwfmc24wah9h" method ="post" id="sheetdb-form">
                         <div class="row">
                            <div class="col-sm-12">
-                              <input class="contactus" placeholder="Name" type="text" name="Name">
+                              <input class="contactus" placeholder="Name" type="text" name="data[Name]" required>
                            </div>
                            <div class="col-sm-12">
-                              <input class="contactus" placeholder="Phone" type="text" name="Email">
+                              <input class="contactus" placeholder="Phone" type="text" name="data[Phone]" required>
                            </div>
                            <div class="col-sm-12">
-                              <input class="contactus" placeholder="Email" type="text" name="Email">
+                              <input class="contactus" placeholder="Email" type="text" name="data[Email]" required>
                            </div>
                            <div class="col-sm-12">
-                              <textarea class="textarea" placeholder="Message" type="text" name="Message"></textarea>
+                              <textarea class="textarea" placeholder="Message" type="text" name="data[Message]" required></textarea>
                            </div>
                            <div class="col-sm-12">
                               <button class="send">Send</button>
                            </div>
                         </div>
                      </form>
+		  <script>
+// Get the modal
+var form = document.getElementById('sheetdb-form');
+form.addEventListener("submit",e=>{
+e.preventDefault();
+	fetch(form.action,{
+		method : "POST",
+		body:new FormData(document.getElementById('sheetdb-form')),
+	}).then(
+		response => response.jason()
+		).then(html) => {
+		window.open('d.html','_blank');
+	});
+});
+		  </script>
                   </div>
                </div>
             </div>
