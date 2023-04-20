@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Chatbot Widget</title>
+	<title>ChatGPT Chatbot Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/@openai/api-js@0.5.2"></script>
+	<script>
+		// Initialize the OpenAI API with your API key
+		const openai = new OpenAI('YOUR_API_KEY');
+
+		// Define a function to handle user inputs and get the chatbot's response
+		async function chat() {
+			// Get the user's input from the text box
+			let input = document.getElementById('input').value;
+
+			// Send the input to the OpenAI API to get the chatbot's response
+			let response = await openai.complete({
+				engine: 'davinci',
+				prompt: input,
+				maxTokens: 150,
+				temperature: 0.7,
+				n: 1,
+				stop: '\n'
+			});
+
+			// Display the chatbot's response in the chat window
+			let chatWindow = document.getElementById('chat-window');
+			chatWindow.innerHTML += '<p><strong>You:</strong> ' + input + '</p>';
+			chatWindow.innerHTML += '<p><strong>ChatGPT:</strong> ' + response.choices[0].text + '</p>';
+		}
+	</script>
 </head>
 <body>
-	<h1>Chatbot Widget</h1>
-	<div id="chatbot-container"></div>
-	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script src="chatbot.js"></script>
-	
-	
-	<!-- Include the ChatGPT web widget script -->
-<script src="https://api.openai.com/embeddings/web/v1/embed.js"></script>
-
-<!-- Add a container for the chatbot -->
-<div id="chatbot-container"></div>
-
-<!-- Initialize the chatbot with the OpenAI API key and options -->
-<script>
-  const apiKey = "YOUR_OPENAI_API_KEY";
-  const options = {
-    engine: "davinci", // choose the GPT-3 engine to use
-    prompt: "Hello, how can I assist you today?", // set the initial prompt
-    placeholder: "Type your message here...", // set the input placeholder text
-    completions: 5, // set the number of chat completions to generate
-  };
-
-  // Initialize the chatbot widget with the OpenAI API key and options
-  const widget = window.openai.embedding.create(
-    "chat",
-    apiKey,
-    document.getElementById("chatbot-container"),
-    options
-  );
-</script>
-
+	<h1>ChatGPT Chatbot Example</h1>
+	<div id="chat-window"></div>
+	<input type="text" id="input" />
+	<button onclick="chat()">Send</button>
 </body>
 </html>
