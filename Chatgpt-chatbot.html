@@ -1,38 +1,107 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ChatGPT Chatbot Example</title>
-	<script src="https://cdn.jsdelivr.net/npm/@openai/api-js@0.5.2"></script>
-	<script>
-		// Initialize the OpenAI API with your API key
-		const openai = new OpenAI('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');
-
-		// Define a function to handle user inputs and get the chatbot's response
-		async function chat() {
-			// Get the user's input from the text box
-			let input = document.getElementById('input').value;
-
-			// Send the input to the OpenAI API to get the chatbot's response
-			let response = await openai.complete({
-				engine: 'davinci',
-				prompt: input,
-				maxTokens: 150,
-				temperature: 0.7,
-				n: 1,
-				stop: '\n'
-			});
-
-			// Display the chatbot's response in the chat window
-			let chatWindow = document.getElementById('chat-window');
-			chatWindow.innerHTML += '<p><strong>You:</strong> ' + input + '</p>';
-			chatWindow.innerHTML += '<p><strong>ChatGPT:</strong> ' + response.choices[0].text + '</p>';
+	<title>ChatGPT Demo</title>
+	<style>
+		/* Style for chat widget */
+		#chat-widget {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			background-color: #fff;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+			padding: 10px;
+			z-index: 9999;
 		}
-	</script>
+
+		/* Style for chat messages */
+		.chat-message {
+			margin: 5px 0;
+			padding: 5px;
+			border-radius: 5px;
+		}
+
+		/* Style for user messages */
+		.user-message {
+			background-color: #def;
+			float: right;
+		}
+
+		/* Style for bot messages */
+		.bot-message {
+			background-color: #eee;
+			float: left;
+		}
+
+		/* Style for chat input box */
+		.chat-input {
+			display: block;
+			width: 100%;
+			padding: 5px;
+			box-sizing: border-box;
+			border-radius: 5px;
+			border: 1px solid #ccc;
+			margin-top: 10px;
+			font-size: 16px;
+			outline: none;
+		}
+
+		/* Style for chat submit button */
+		.chat-submit {
+			display: block;
+			background-color: #008cba;
+			color: #fff;
+			padding: 5px 10px;
+			border: none;
+			border-radius: 5px;
+			margin-top: 10px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
-	<h1>ChatGPT Chatbot Example</h1>
-	<div id="chat-window"></div>
-	<input type="text" id="input" />
-	<button onclick="chat()">Send</button>
-</body>
-</html>
+
+	<!-- Add a div to hold the chat widget -->
+	<div id="chat-widget">
+		<div class="chat-message bot-message">Hello, how can I assist you today?</div>
+		<input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+		<button id="chat-submit" class="chat-submit">Send</button>
+	</div>
+
+	<!-- Load the ChatGPT library from the OpenAI API -->
+	<script src="https://cdn.jsdelivr.net/npm/@openai/chat-api@0.2.0/dist/chat.js"></script>
+
+	<script>
+		// Create a new chat widget
+		var chat = new OpenAIChat.default({
+			container: document.getElementById("chat-widget"),
+			secret: "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",
+			model: "davinci",
+			placeholder: "Type a message...",
+			title: "Chat with ChatGPT"
+		});
+
+		// Handle chat submission
+		var chatInput = document.getElementById("chat-input");
+		var chatSubmit = document.getElementById("chat-submit");
+		chatSubmit.addEventListener("click", function(event) {
+			event.preventDefault();
+
+			// Get user message
+			var message = chatInput.value.trim();
+
+			// Send message to ChatGPT model and get response
+			chat.ask(message).then(function(response) {
+				// Add user message to chat widget
+				chat.addUserMessage(message);
+				// Add bot response to chat widget
+				chat.addBotMessage(response);
+
+				// Scroll to bottom of chat widget to show latest messages
+				var chatWidget = document.getElementById("chat-widget");
+				chatWidget.scrollTop = chatWidget.scrollHeight;
+			});
+
+			// Clear input field
