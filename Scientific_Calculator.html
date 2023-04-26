@@ -20,12 +20,12 @@
 
 		.display {
 			width: 100%;
-			height: 50px;
+			height: 80px;
 			border: none;
 			background-color: #fff;
 			border-radius: 5px;
 			padding: 10px;
-			font-size: 24px;
+			font-size: 36px;
 			text-align: right;
 			margin-bottom: 10px;
 		}
@@ -52,11 +52,26 @@
 			background-color: #f44336;
 			color: #fff;
 		}
+		
+		.history {
+			  list-style-type: none;
+			  padding: 0;
+			  margin: 0;
+			  max-height: 120px;
+			  overflow-y: scroll;
+			}
+
+		.history li {
+			  font-size: 18px;
+			  padding: 5px;
+			  border-bottom: 1px solid #ccc;
+			}
 	</style>
 </head>
 <body>
 	<div class="calculator">
 		<input type="text" class="display">
+		<ul class="history"></ul>
 
 		<button onclick="addText('sin(')">sin</button>
 		<button onclick="addText('cos(')">cos</button>
@@ -99,15 +114,22 @@
 			document.querySelector('.display').value = '';
 		}
 
-		// Evaluate the expression in the display
+
+		
+		// Evaluate function to Evaluate the expression in the display & add the current calculation to the history
 		function calculate() {
-			try {
-				const result = eval(document.querySelector('.display').value);
-				document.querySelector('.display').value = result;
-			} catch (error) {
-				alert('Invalid Expression!');
+			  const display = document.querySelector('.display');
+			  try {
+			    const result = eval(display.value);
+			    display.value = result;
+			    const history = document.querySelector('.history');
+			    const li = document.createElement('li');
+			    li.textContent = `${display.value} = ${result}`;
+			    history.appendChild(li);
+			  } catch (error) {
+			    alert('Invalid Expression!');
+			  }
 			}
-		}
 	</script>
 </body>
 </html>
