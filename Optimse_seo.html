@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>URL Optimizer</title>
+     <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin: 20px 0;
+      }
+
+      form {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+
+      button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #3e8e41;
+      }
+
+      #optimized-url {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>URL Optimizer</h1>
+    <form>
+      <label for="url-input">Enter a URL:</label>
+      <input type="text" id="url-input" name="url" required>
+      <br><br>
+      <label for="protocol-select">Choose a protocol:</label>
+      <select id="protocol-select" name="protocol">
+        <option value="http://">http://</option>
+        <option value="https://">https://</option>
+      </select>
+      <br><br>
+      <label for="domain-input">Enter a domain:</label>
+      <input type="text" id="domain-input" name="domain" required>
+      <br><br>
+      <label for="path-input">Enter a path:</label>
+      <input type="text" id="path-input" name="path">
+      <br><br>
+      <label for="query-input">Enter query parameters:</label>
+      <input type="text" id="query-input" name="query">
+      <br><br>
+      <button type="button" onclick="optimizeUrl()">Optimize</button>
+    </form>
+    <br><br>
+    <div id="optimized-url"></div>
+
+    <script>
+      function optimizeUrl() {
+        const protocolSelect = document.getElementById("protocol-select");
+        const domainInput = document.getElementById("domain-input");
+        const pathInput = document.getElementById("path-input");
+        const queryInput = document.getElementById("query-input");
+
+        let url = protocolSelect.value + domainInput.value;
+
+        if (pathInput.value) {
+          url += "/" + pathInput.value;
+        }
+
+        if (queryInput.value) {
+          url += "?" + queryInput.value;
+        }
+
+        const optimizedUrl = document.createElement("p");
+        optimizedUrl.textContent = "Optimized URL: " + url;
+        document.getElementById("optimized-url").appendChild(optimizedUrl);
+      }
+    </script>
+  </body>
+</html>
