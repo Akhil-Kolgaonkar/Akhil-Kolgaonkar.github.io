@@ -102,6 +102,7 @@
 		<button onclick="calculate()" class="operator">=</button>
 		<button onclick="addText('+')">+</button>
 		<button onclick="addText('Math.PI')">π</button>
+		<button onclick="backspace()" class="clear">←</button>
 	</div>
 <script>
 		// Add text to display
@@ -114,7 +115,10 @@
 			document.querySelector('.display').value = '';
 		}
 
-
+		function backspace() {
+			  const display = document.querySelector('.display');
+			  display.value = display.value.slice(0, -1);
+			}
 		
 		// Evaluate function to Evaluate the expression in the display & add the current calculation to the history
 	
