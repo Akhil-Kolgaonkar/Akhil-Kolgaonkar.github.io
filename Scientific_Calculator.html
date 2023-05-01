@@ -119,36 +119,28 @@
 		// Evaluate function to Evaluate the expression in the display & add the current calculation to the history
 	
 		function calculate() {
-			  const display = document.querySelector('.display');
-			  try {
-			    let equation = display.value;
-			    let result;
+		  const display = document.querySelector('.display');
+		  try {
+		    let equation = display.value;
+		    let result;
 
-			    if (equation.includes("sin(")) {
-			      const angle = equation.slice(4, -1);
-			      result = Math.sin(angle * Math.PI / 180);
-			    } else if (equation.includes("cos(")) {
-			      const angle = equation.slice(4, -1);
-			      result = Math.cos(angle * Math.PI / 180);
-			    } else if (equation.includes("tan(")) {
-			      const angle = equation.slice(4, -1);
-			      result = Math.tan(angle * Math.PI / 180);
-			    } else if (equation.includes("sqrt(")) {
-			      const number = equation.slice(5, -1);
-			      result = Math.sqrt(number);
-			    } else {
-			      result = eval(equation);
-			    }
+		    // Replace sin(), cos(), and tan() with their corresponding Math functions
+		    equation = equation.replace(/sin\(([^)]+)\)/g, "Math.sin($1 * Math.PI / 180)");
+		    equation = equation.replace(/cos\(([^)]+)\)/g, "Math.cos($1 * Math.PI / 180)");
+		    equation = equation.replace(/tan\(([^)]+)\)/g, "Math.tan($1 * Math.PI / 180)");
 
-			    display.value = result;
-			    const history = document.querySelector('.history');
-			    const li = document.createElement('li');
-			    li.textContent = `${equation} = ${result}`;
-			    history.appendChild(li);
-			  } catch (error) {
-			    alert('Invalid Expression!');
-			  }
-			}
+		    // Evaluate the equation
+		    result = eval(equation);
+
+		    display.value = result;
+		    const history = document.querySelector('.history');
+		    const li = document.createElement('li');
+		    li.textContent = `${equation} = ${result}`;
+		    history.appendChild(li);
+		  } catch (error) {
+		    alert('Invalid Expression!');
+		  }
+		}
 
 		
 
