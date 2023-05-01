@@ -128,6 +128,9 @@
 		    equation = equation.replace(/sin\(([^)]+)\)/g, "Math.sin($1 * Math.PI / 180)");
 		    equation = equation.replace(/cos\(([^)]+)\)/g, "Math.cos($1 * Math.PI / 180)");
 		    equation = equation.replace(/tan\(([^)]+)\)/g, "Math.tan($1 * Math.PI / 180)");
+		    
+		   // Replace sqrt() with Math.sqrt()
+		    equation = equation.replace(/sqrt\(([^)]+)\)/g, "Math.sqrt($1)");
 
 		    // Evaluate the equation
 		    result = eval(equation);
