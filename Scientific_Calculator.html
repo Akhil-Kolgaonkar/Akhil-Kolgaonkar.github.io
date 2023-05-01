@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Scientific Calculator</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+		}
+
+		.calculator {
+			width: 600px;
+			margin: 50px auto;
+			background-color: #f1f1f1;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+			padding: 20px;
+		}
+
+		.display {
+			width: 99%;
+			height: 200px;
+			border: none;
+			background-color: #fff;
+			border-radius: 5px;
+			padding: 10px;
+			font-size: 36px;
+			text-align: right;
+			margin-bottom: 10px;
+		}
+
+		button {
+			width: 50px;
+			height: 50px;
+			font-size: 24px;
+			border: none;
+			border-radius: 5px;
+			margin-right: 5px;
+			margin-bottom: 5px;
+			background-color: #fff;
+			color: #000;
+			cursor: pointer;
+		}
+
+		button.operator {
+			background-color: #4caf50;
+			color: #fff;
+		}
+
+		button.clear {
+			background-color: #f44336;
+			color: #fff;
+		}
+		
+		.history {
+			  list-style-type: none;
+			  padding: 0;
+			  margin: 0;
+			  max-height: 120px;
+			  overflow-y: scroll;
+			}
+
+		.history li {
+			  font-size: 18px;
+			  padding: 5px;
+			  border-bottom: 1px solid #ccc;
+			}
+	</style>
+</head>
+<body>
+	<div class="calculator">
+		<input type="text" class="display">
+		<ul class="history"></ul>
+		
+		<button onclick="addText('sin(')">sin</button>
+		<button onclick="addText('cos(')">cos</button>
+		<button onclick="addText('tan(')">tan</button>
+		<button onclick="addText('sqrt(')">√</button>
+
+
+		<button onclick="addText('*')">×</button>
+		<button onclick="addText('/')">÷</button>
+		<button onclick="addText('+')">+</button>
+    <button onclick="addText('-')">-</button>
+    <button onclick="addText('(')">(</button>
+		<button onclick="addText(')')">)</button>
+
+		<button onclick="addText('1')">1</button>
+		<button onclick="addText('2')">2</button>
+		<button onclick="addText('3')">3</button>
+		<button onclick="addText('4')">4</button>
+		<button onclick="addText('5')">5</button>
+		<button onclick="addText('6')">6</button>
+    <button onclick="addText('7')">7</button>
+		<button onclick="addText('8')">8</button>
+		<button onclick="addText('9')">9</button>
+    <button onclick="addText('0')">0</button>
+		
+		<button onclick="clearDisplay()" class="clear">C</button>	
+		<button onclick="addText('.')">.</button>
+		<button onclick="calculate()" class="operator">=</button>
+		<button onclick="addText('^')">^</button>
+		<button onclick="addText('Math.PI')">π</button>
+    <button onclick="backspace()" class="clear">←</button>
+		
+	</div>
+<script>
+		// Add text to display
+		function addText(text) {
+			document.querySelector('.display').value += text;
+		}
+
+		// Clear the display
+		function clearDisplay() {
+			document.querySelector('.display').value = '';
+		}
+
+		function backspace() {
+			  const display = document.querySelector('.display');
+			  display.value = display.value.slice(0, -1);
+			}
+		
+		// Evaluate function to Evaluate the expression in the display & add the current calculation to the history
+	
+		function calculate() {
+		  const display = document.querySelector('.display');
+		  try {
+		    let equation = display.value;
+		    let result;
+
+		    // Replace sin(), cos(), and tan() with their corresponding Math functions
+		    equation = equation.replace(/sin\(([^)]+)\)/g, "Math.sin($1 * Math.PI / 180)");
+		    equation = equation.replace(/cos\(([^)]+)\)/g, "Math.cos($1 * Math.PI / 180)");
+		    equation = equation.replace(/tan\(([^)]+)\)/g, "Math.tan($1 * Math.PI / 180)");
+		    
+		   // Replace sqrt() with Math.sqrt()
+		    equation = equation.replace(/sqrt\(([^)]+)\)/g, "Math.sqrt($1)");
+
+		    // Evaluate the equation
+		    result = eval(equation);
+
+		    display.value = result;
+		    const history = document.querySelector('.history');
+		    const li = document.createElement('li');
+		    li.textContent = `${equation} = ${result}`;
+		    history.appendChild(li);
+		  } catch (error) {
+		    alert('Invalid Expression!');
+		  }
+		}
+
+		
+
+	
+	</script>
+</body>
+</html>
