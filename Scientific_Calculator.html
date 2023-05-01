@@ -82,8 +82,8 @@
 		<button onclick="addText('*')">×</button>
 		<button onclick="addText('/')">÷</button>
 		<button onclick="addText('+')">+</button>
-    <button onclick="addText('-')">-</button>
-    <button onclick="addText('(')">(</button>
+    		<button onclick="addText('-')">-</button>
+    		<button onclick="addText('(')">(</button>
 		<button onclick="addText(')')">)</button>
 
 		<button onclick="addText('1')">1</button>
@@ -92,17 +92,23 @@
 		<button onclick="addText('4')">4</button>
 		<button onclick="addText('5')">5</button>
 		<button onclick="addText('6')">6</button>
-    <button onclick="addText('7')">7</button>
+    		<button onclick="addText('7')">7</button>
 		<button onclick="addText('8')">8</button>
 		<button onclick="addText('9')">9</button>
-    <button onclick="addText('0')">0</button>
+    		<button onclick="addText('0')">0</button>
 		
 		<button onclick="clearDisplay()" class="clear">C</button>	
 		<button onclick="addText('.')">.</button>
 		<button onclick="calculate()" class="operator">=</button>
 		<button onclick="addText('^')">^</button>
 		<button onclick="addText('Math.PI')">π</button>
-    <button onclick="backspace()" class="clear">←</button>
+    		
+		
+		<button class="button" onclick="addText('log(')">log</button>
+		<button class="button" onclick="addText('!')">x!</button>
+		<button class="button" onclick="addText('exp(')">exp</button>
+		<button class="button" onclick="addText('e')">e</button>
+        	<button onclick="backspace()" class="clear">←</button>
 		
 	</div>
 <script>
@@ -136,6 +142,14 @@
 		    
 		   // Replace sqrt() with Math.sqrt()
 		    equation = equation.replace(/sqrt\(([^)]+)\)/g, "Math.sqrt($1)");
+   
+
+		   // Add support for log(), x!, exp(), and e
+		    equation = equation.replace(/log\(([^)]+)\)/g, "Math.log10($1)");
+		    equation = equation.replace(/(\d+)\!/g, "factorial($1)");
+		    equation = equation.replace(/exp\(([^)]+)\)/g, "Math.exp($1)");
+		    equation = equation.replace(/\be\b/g, "Math.E");
+
 
 		    // Evaluate the equation
 		    result = eval(equation);
@@ -150,7 +164,16 @@
 		  }
 		}
 
-		
+		//factorial() function is defined separately to handle the x! operation.
+		function factorial(num) {
+		  if (num < 0) {
+		    return -1;
+		  } else if (num === 0) {
+		    return 1;
+		  } else {
+		    return num * factorial(num - 1);
+		  }
+		}	
 
 	
 	</script>
