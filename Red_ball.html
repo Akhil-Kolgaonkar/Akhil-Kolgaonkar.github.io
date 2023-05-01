@@ -25,7 +25,7 @@ var myScore;
     
 function startGame() {
         
-    myGamePiece = new component(40, 40, "smiley.gif", 10, 120, "image");
+    myGamePiece = new component(40, 40, "images/smiley.gif", 10, 120, "image");
     myScore = new component("30px", "Consolas", "black", 720, 40, "text");    
     myGameArea.start();
     document.addEventListener("keydown", function(event) {
@@ -160,27 +160,27 @@ function everyinterval(n) {
 }
 
 function moveup() {
-	myGamePiece.image.src = "angry.gif";
+	myGamePiece.image.src = "images/angry.gif";
     myGamePiece.speedY = -1; 
 }
 
 function movedown() {
-	myGamePiece.image.src = "angry.gif";
+	myGamePiece.image.src = "images/angry.gif";
     myGamePiece.speedY = 1; 
 }
 
 function moveleft() {
-	myGamePiece.image.src = "angry.gif";
+	myGamePiece.image.src = "images/angry.gif";
     myGamePiece.speedX = -1; 
 }
 
 function moveright() {
-	myGamePiece.image.src = "angry.gif";
+	myGamePiece.image.src = "images/angry.gif";
     myGamePiece.speedX = 1; 
 }
 
 function clearmove() {
-	myGamePiece.image.src = "smiley.gif";
+	myGamePiece.image.src = "images/smiley.gif";
     myGamePiece.speedX = 0; 
     myGamePiece.speedY = 0; 
 }
