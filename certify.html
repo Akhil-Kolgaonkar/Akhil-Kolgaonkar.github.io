@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('path/to/your/wallpaper.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ and Edge */
+            user-select: none; /* Standard syntax */
+        }
+        h1 {
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ and Edge */
+            user-select: none; /* Standard syntax */
+        }
+        .certificate-container {
+            position: relative;
+            margin: 20px 0;
+            width: 80%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .certificate-title {
+            margin: 0;
+            padding: 15px;
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            font-size: 1.2em;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ and Edge */
+            user-select: none; /* Standard syntax */
+        }
+        .certificate {
+            width: 100%;
+            height: 500px;
+            pointer-events: none; /* Prevent interaction with the iframe */
+        }
+        .watermark-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .watermark-row {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .watermark {
+            opacity: 0.1;
+            font-size: 1em;
+            color: #007BFF;
+            flex-grow: 1;
+            text-align: center;
+            line-height: 100px;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10+ and Edge */
+            user-select: none; /* Standard syntax */
+        }
+    </style>
+    <script>
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'p' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+            if (e.key === 's' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+            if (e.key === 'u' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+            if (e.key === 'c' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+            if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Certificate Showcase</h1>
+    <div class="certificate-container">
+        <div class="certificate-title">Certificate 1</div>
+        <iframe class="certificate" src="path/to/your/certificate1.pdf" frameborder="0"></iframe>
+        <div class="watermark-container">
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+        </div>
+    </div>
+    <div class="certificate-container">
+        <div class="certificate-title">Certificate 2</div>
+        <iframe class="certificate" src="path/to/your/certificate2.pdf" frameborder="0"></iframe>
+        <div class="watermark-container">
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+            <div class="watermark-row">
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+                <div class="watermark">DO NOT COPY</div>
+            </div>
+        </div>
+    </div>
+    <!-- Add more certificates as needed -->
+</body>
+</html>
